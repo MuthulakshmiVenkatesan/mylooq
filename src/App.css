@@ -1,0 +1,881 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: Regular;
+    src: url(./assets/fonts/manrope-regular.otf);
+}
+
+@font-face {
+    font-family: Medium;
+    src: url(./assets/fonts/manrope-medium.otf);
+}
+
+@font-face {
+    font-family: SemiBold;
+    src: url(./assets/fonts/manrope-semibold.otf);
+}
+
+@font-face {
+    font-family: Bold;
+    src: url(./assets/fonts/manrope-bold.otf);
+}
+
+@font-face {
+    font-family: ExtraBold;
+    src: url(./assets/fonts/manrope-extrabold.otf);
+}
+
+.header-scrolled {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+html,
+body {
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background: #fff;
+}
+
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6E2C91;
+    border-radius: 50px;
+}
+
+/* Hide scrollbar */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+
+@media (max-width: 768px) {
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+}
+
+@media screen and (min-width: 1920px) and (max-width: 2560px) {
+
+
+    .cart_foot {
+        padding: 40px 0;
+    }
+
+    .schedulebook_button {
+        padding: 5px 28px;
+    }
+
+    .bannerwhole {
+        padding: 0 0 80px !important;
+    }
+
+    .laptop_width {
+        width: 1230px;
+    }
+
+    .processheader_whole {
+        width: 96%;
+    }
+
+    .sidebar_aside {
+        gap: 10px;
+        width: 80px;
+    }
+
+    .laptop_pl {
+        padding-left: 86px;
+    }
+
+    .laptop_user_img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .laptop_tabs button {
+        padding: 16px 58px;
+    }
+
+    .sidebar {
+        width: 80px;
+    }
+
+    .desktop_width {
+        width: 1230px;
+        padding: 80px 0;
+        margin: 0 auto;
+    }
+
+    .footer_sub {
+        padding: 0;
+    }
+
+    .common_p_80 {
+        padding: 80px 0;
+    }
+
+    .banner_img {
+        height: 600px;
+    }
+
+    .provider_detail_container {
+        max-width: 1230px;
+        margin: 0 auto;
+        padding: 80px 0 50px;
+    }
+}
+
+.input-group {
+    position: relative;
+}
+
+/* Input */
+.input-group input {
+    width: 100%;
+    padding: 12px 0px;
+    font-size: 16px;
+    outline: none;
+
+}
+
+
+
+/* Label default position */
+.input-group label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+/* Move label on focus OR when input has value */
+.input-group input:focus+label,
+.input-group input:not(:placeholder-shown)+label {
+    top: 10px;
+    font-size: 12px;
+}
+
+/* .input-group:focus-within input {
+    border-color: #6E2C91;
+    background: #fff;
+  } */
+/* 
+.input-group:focus{
+    border: 1px solid #6E2C91;
+} */
+
+
+.input-group input:focus,
+.input-group input:not(:placeholder-shown) {
+    position: relative;
+    top: 6px;
+}
+
+.input-groups {
+    position: relative;
+}
+
+/* Input */
+.input-groups input {
+    width: 100%;
+    padding: 18px 0px;
+    font-size: 16px;
+    outline: none;
+}
+
+
+
+/* Label default position */
+.input-groups label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+/* Move label on focus OR when input has value */
+.input-groups input:focus+label,
+.input-groups input:not(:placeholder-shown)+label {
+    top: 15px;
+    font-size: 12px;
+}
+
+
+.input-groups input:focus,
+.input-groups input:not(:placeholder-shown) {
+    position: relative;
+    top: 6px;
+}
+
+.location_input input:focus+label,
+.input-location_input input:not(:placeholder-shown)+label {
+    top: 20px;
+    font-size: 12px;
+}
+
+.setlocation_input label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+/* Move label on focus OR when input has value */
+.setlocation_input input:focus+label,
+.setlocation_input input:not(:placeholder-shown)+label {
+    top: 15px;
+    font-size: 12px;
+}
+
+
+.setlocation_input input:focus,
+.setlocation_input input:not(:placeholder-shown) {
+    position: relative;
+    top: 6px;
+}
+
+.setloaction_input input:focus+label,
+.setloaction_input input:not(:placeholder-shown)+label {
+    top: 20px;
+    font-size: 12px;
+}
+
+.input-groups {
+    position: relative;
+}
+
+/* Input */
+.input-groups textarea {
+    width: 100%;
+    padding: 18px 0px;
+    font-size: 16px;
+    outline: none;
+}
+
+
+
+/* Label default position */
+.input-groups textarea {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+/* Move label on focus OR when input has value */
+.input-groups textarea:focus+label,
+.input-groups textarea:not(:placeholder-shown)+label {
+    top: 15px;
+    font-size: 12px;
+}
+
+
+.input-groups textarea:focus,
+.input-groups textarea:not(:placeholder-shown) {
+    position: relative;
+    top: 6px;
+}
+
+.slider_img::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0) 53.3%);
+    z-index: 1;
+    border-radius: 30px;
+}
+
+@media screen and (min-width: 1440px) and (max-width: 2560px) {
+
+    .toogleonline_visible {
+        left: 72px !important;
+    }
+
+    .looqer_home_container {
+        padding: 0px;
+    }
+
+    .looqer_other_container {
+        padding: 40px 0;
+    }
+
+    .banner_home {
+        padding-top: 30px;
+    }
+
+    .text30px {
+        font-size: 30px;
+    }
+
+    .myprofile_height {
+        min-height: 85vh;
+    }
+
+    .main_height {
+        min-height: 80vh;
+    }
+
+    .sidebar aside svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .sidebar_logos {
+        /* padding: 0px 16px; */
+    }
+
+    .sidebar_logos img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .sidebar_logo img {
+        width: auto;
+        height: auto;
+    }
+
+    .signup_height {
+        max-height: 60vh;
+    }
+
+    .text20px {
+        font-size: 20px;
+    }
+
+    .header_div {
+        left: 84px;
+    }
+
+    .text16px {
+        font-size: 16px;
+    }
+
+    .leading40px {
+        line-height: 40px;
+    }
+
+    .lottie_height {
+        height: 84vh;
+    }
+
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+
+    .booking_tabs {
+        gap: 10px;
+    }
+
+    .headertoogle_div {
+        display: none;
+    }
+
+    .myprofile_height {
+        min-height: 80vh;
+    }
+
+    .toogleonline_visible {
+        padding: 6.4px !important;
+    }
+
+    .verifynoti_div {
+        margin-top: 50px;
+    }
+
+    .filteropen {
+        display: block;
+    }
+
+    .filterhide {
+        display: none;
+    }
+
+    .filtersection {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .finddiv_content {
+        padding: 50px 0 0 !important;
+    }
+
+    .processheader_whole {
+        flex-direction: column;
+        padding: 20px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .header_Sub {
+        justify-content: center;
+    }
+
+    .laptop_pl {
+        padding: 0px;
+    }
+
+    /* .laptop_tabs {
+        width: calc(94vw - 15px);
+    } */
+
+    .laptop_tabs button {
+        padding: 10px 21px;
+    }
+
+    .laptop_tabs div {
+        width: fit-content;
+    }
+
+    .process_head {
+        justify-content: center;
+        position: relative;
+        left: 20px;
+    }
+
+    .search_grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .header_div {
+        left: 44px;
+        padding: 12px;
+    }
+
+    .banner_cont {
+        max-width: 100%;
+    }
+
+    .find_div {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .w100 {
+        width: 100%;
+    }
+
+    .finddiv_img {
+        position: relative;
+    }
+
+    .finddiv_img {
+        width: 100%;
+    }
+
+    .mobile_common_p30 {
+        padding: 30px 0;
+    }
+
+
+    .find_div {
+        gap: 0;
+    }
+
+    .notification_drawer {
+        left: 0px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+
+    .booking_tabs {
+        gap: 10px;
+    }
+    
+    .profilestatus_div {
+        flex-direction: column;
+        gap: 0px;
+        padding: 0px;
+    }
+
+    .profilestatus_subdiv {
+        padding: 20px 20px;
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .service_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .looqer_home_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .looqer_home_table {
+        width: 150vw;
+    }
+
+    .footer_whole {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .find_div {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .finddiv_img {
+        position: relative;
+    }
+
+    .finddiv_img {
+        width: 100%;
+    }
+
+    .lottie_height {
+        height: 86vh;
+    }
+
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1200px) {
+
+    .looqer_language_dropdown {
+        left: -500px !important;
+    }
+
+    .looqer_currency_dropdown {
+        left: -550px !important;
+    }
+
+    .laptop_tabs button {
+        padding: 10px 30px;
+    }
+
+    .registerdiv_height {
+        height: 200px;
+    }
+
+    .search_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* .lottie{
+        height: 605px;
+    } */
+}
+
+@media screen and (max-width: 767px) {
+
+    .headertoogle_div {
+        margin-right: 30px;
+    }
+
+
+    .filteropen {
+        display: block;
+    }
+
+    .filterhide {
+        display: none;
+    }
+
+    .filtersection {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .laptop_pl {
+        padding: 0%;
+    }
+
+    .laptop_tabs {
+        width: calc(94vw - 15px);
+    }
+
+    .laptop_tabs div {
+        width: fit-content;
+    }
+
+    .laptop_tabs button {
+        padding: 10px 21px;
+    }
+
+    .processheader_whole {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+}
+
+@media screen and (min-width: 425px) and (max-width: 767px) {
+    .search_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header_txt {
+        width: 174px;
+    }
+
+}
+
+@media screen and (min-width: 375px) and (max-width: 424px) {
+    .header_txt {
+        width: 124px;
+    }
+
+    .mobile_lottie_height {
+        height: 70vh;
+    }
+}
+
+@media screen and (min-width: 640px) and (max-width: 767px) {
+
+    .header_hamburger {
+        width: 10%;
+        top: -2px;
+    }
+
+    .header_text {
+        left: 20px;
+        position: relative;
+    }
+
+
+    .myprofile_height {
+        min-height: 80vh;
+    }
+
+    .profilestatus_div {
+        flex-direction: column;
+        gap: 0px;
+        padding: 0px;
+    }
+
+    .profilestatus_subdiv {
+        padding: 20px 20px;
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .headertoogle_div {
+        display: none;
+    }
+
+    .toogleonline_visible {
+        left: 45px;
+        padding: 6px 12px !important;
+    }
+
+    .footer_whole {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .looqer_home_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .looqer_home_table {
+        width: 160vw;
+    }
+
+    .header_div {
+        left: 45px;
+        padding: 12px;
+    }
+
+    .find_div {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0px;
+    }
+
+    .finddiv_img {
+        position: relative;
+        width: 100%;
+    }
+
+    .finddiv_img img {
+        width: 100%;
+    }
+
+    .finddiv_content {
+        padding-bottom: 0px;
+    }
+
+    .w100 {
+        width: 100%;
+    }
+
+
+
+
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 768px) {
+    .search_Cont {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .search_Cont_Sub {
+        width: 415px;
+    }
+
+    .search_Cont a {
+        width: 100%;
+        padding: 14px;
+    }
+
+
+}
+
+@media screen and (max-width: 1023px) {
+    .filteropen {
+        display: block;
+    }
+
+    .filterhide {
+        display: none;
+    }
+
+    .filtersection {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 994px) and (max-width: 1023px) {
+    .header_div {
+        padding: 12px;
+        left: 45px;
+    }
+}
+
+@media screen and (min-width: 640px) and (max-width: 1023px) {
+
+    .looqer_language_dropdown {
+        width: 600px;
+        left: -300px !important;
+    }
+
+    .looqer_currency_dropdown {
+        width: 600px;
+        left: -340px !important;
+    }
+
+    .header_languagedrop {
+        width: 600px;
+        left: -450px;
+    }
+
+    .header_currencydrop {
+        width: 600px;
+        left: -550px;
+    }
+
+    .dropdown_grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+.review_height::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+    .mobile_lottie_height {
+        height: 64vh;
+    }
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 363px) {
+    .profileemail_text {
+        width: 160px;
+    }
+}
+
+.table_scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.table_scrollbar::-webkit-scrollbar-thumb {
+    background: #6E2C91;
+    border-radius: 50px;
+}
+
+.input-groupedit {
+    position: relative;
+}
+
+/* Input */
+.input-groupedit input {
+    width: 100%;
+    padding: 18px 0px;
+    font-size: 16px;
+    outline: none;
+
+}
+
+
+
+/* Label default position */
+.input-groupedit label {
+    position: absolute;
+    top: 46%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+/* Move label on focus OR when input has value */
+.input-groupedit input:focus+label,
+.input-groupedit input:not(:placeholder-shown)+label {
+    top: 18px;
+    font-size: 12px;
+}
+
+
+.input-groupedit input:focus,
+.input-groupedit input:not(:placeholder-shown) {
+    position: relative;
+    top: 8px;
+}
