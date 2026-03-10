@@ -20,13 +20,9 @@ const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 
 export default function DatePickerModal({ isOpen, onClose, selectedDate, onDateSelect, onFilter }: DatePickerModalProps) {
     const [currentDate, setCurrentDate] = useState(selectedDate || new Date());
-    const [selectedDates, setSelectedDates] = useState<Date[]>(selectedDate ? [selectedDate] : []);
-    const [rangeStart, setRangeStart] = useState<Date | null>(null);
-    const [rangeEnd, setRangeEnd] = useState<Date | null>(null);
 
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
-
     // Get first day of month and number of days
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -44,64 +40,7 @@ export default function DatePickerModal({ isOpen, onClose, selectedDate, onDateS
     const nextMonthDays = daysToShow - totalDaysShown;
 
     const handleDateClick = (date: Date) => {
-        // If clicking the same date, deselect it
-        if (selectedDates.length === 1 &&
-            selectedDates[0].getDate() === date.getDate() &&
-            selectedDates[0].getMonth() === date.getMonth() &&
-            selectedDates[0].getFullYear() === date.getFullYear()) {
-            setRangeStart(null);
-            setRangeEnd(null);
-            setSelectedDates([]);
-            return;
-        }
-
-        if (!rangeStart) {
-            setRangeStart(date);
-            setRangeEnd(null);
-            setSelectedDates([date]);
-            onDateSelect(date);
-        } else if (!rangeEnd) {
-            if (date < rangeStart) {
-                setRangeEnd(rangeStart);
-                setRangeStart(date);
-            } else {
-                setRangeEnd(date);
-            }
-            // Create range
-            const range: Date[] = [];
-            const start = date < rangeStart ? date : rangeStart;
-            const end = date < rangeStart ? rangeStart : date;
-            for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-                range.push(new Date(d));
-            }
-            setSelectedDates(range);
-        } else {
-            // Reset selection
-            setRangeStart(date);
-            setRangeEnd(null);
-            setSelectedDates([date]);
-            onDateSelect(date);
-        }
-    };
-
-    const isDateInRange = (date: Date) => {
-        if (!rangeStart || !rangeEnd) return false;
-        return date >= rangeStart && date <= rangeEnd;
-    };
-
-    const isDateSelected = (date: Date) => {
-        return selectedDates.some(d =>
-            d.getDate() === date.getDate() &&
-            d.getMonth() === date.getMonth() &&
-            d.getFullYear() === date.getFullYear()
-        );
-    };
-
-    const isPrimarySelected = (date: Date) => {
-        if (!selectedDate) return false;
-        return date.getDate() === selectedDate.getDate() &&
-            date.getMonth() === selectedDate.getMonth() &&
-            date.getFullYear() === selectedDate.getFullYear();
+        onDateSelect(date);
     };
 
     const formatSelectedDate = () => {
@@ -131,9 +70,21 @@ export default function DatePickerModal({ isOpen, onClose, selectedDate, onDateS
     // // Generate years (current year ± 10)
     // const years = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
 
+    const handleYearChange = (year: string) => {
+        const yearNumber = parseInt(year, 10);
+        if (!Number.isNaN(yearNumber)) {
+            setCurrentDate(new Date(yearNumber, currentMonth, 1));
+        }
+    };
+
+    // Years from 2020 up to 10 years in the future
+    const startYear = 2020;
+    const endYear = currentYear + 10;
+    const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i);
+
     const handleFilter = () => {
-        if (selectedDates.length > 0) {
-            onDateSelect(selectedDates[0]);
+        if (selectedDate) {
+            onDateSelect(selectedDate);
         }
         onFilter();
         onClose();
@@ -142,14 +93,14 @@ export default function DatePickerModal({ isOpen, onClose, selectedDate, onDateS
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogOverlay className="fixed inset-0 bg-[rgba(0,0,0,0.5)] data-[state=open]:animate-in data-[state=closed]:animate-out z-[100]" />
-            <DialogContent className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[380px] bg-[#fff] rounded-[30px] p-0 border-none shadow-[0px_4px_20px_rgba(0,0,0,0.15)] z-[101] data-[state=open]:animate-in data-[state=closed]:animate-out max-sm:m-[20px] max-sm:max-w-[calc(100%-40px)]">
+            <DialogContent className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[380px] bg-[#fff] rounded-[30px] p-0 border-none shadow-[0px_4px_20px_rgba(0,0,0,0.15)] z-[101] data-[state=open]:animate-in data-[state=closed]:animate-out max-sm:max-w-[calc(100%-40px)]">
                 {/* Header */}
-                <DialogHeader className="bg-[#6E2C91] p-[30px] rounded-t-[30px] relative">
-                    <DialogClose className="absolute right-[24px] top-[20px] cursor-pointer p-[4px] rounded-full transition-colors">
+                <DialogHeader className="bg-[#6E2C91] p-[30px_30px_20px] rounded-t-[30px] relative">
+                    <DialogClose className="absolute right-[24px] top-[20px] cursor-pointer p-[4px] rounded-full transition-colors border-none outline-none shadow-none focus:outline-none focus:border-none focus:shadow-none">
                         <CloseIcon className="w-[18px] h-[18px]" fill="#fff" />
                     </DialogClose>
                     <div className="flex flex-col gap-[30px]">
-                        <DialogTitle className="text-[12px] font-[Regular] text-[#fff] m-0">
+                        <DialogTitle className="text-[10px] tracking-[2px] font-[Regular] text-[#fff] m-0">
                             SELECT DATE
                         </DialogTitle>
                         <p className="text-[30px] font-[Bold] text-[#fff] m-0">
@@ -160,22 +111,56 @@ export default function DatePickerModal({ isOpen, onClose, selectedDate, onDateS
 
                 {/* Month/Year Navigation */}
                 <div className="flex items-center justify-between p-[16px_30px]">
-                    <div className="flex items-center gap-[6px]">
-                        <Select value={currentMonth.toString()} onValueChange={handleMonthChange}>
-                            <SelectTrigger className="w-auto  h-auto p-[0] border-none bg-transparent text-[14px] font-[Medium] text-[#878387] cursor-pointer ">
-                                <SelectValue>
-                                    {months[currentMonth]} {currentYear}
-                                </SelectValue>
-                            </SelectTrigger>
-                            <SelectContent>
-                                {months.map((month, index) => (
-                                    <SelectItem key={index} value={index.toString()}>
-                                        {month} {currentYear}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                        <DateArrowIcon />
+                    <div className="flex items-center w-full gap-[10px]">
+                        {/* Custom Month select */}
+                        <div className="flex items-center">
+                            <Select value={currentMonth.toString()} onValueChange={handleMonthChange}>
+                                <SelectTrigger className="flex items-center gap-[6px] h-auto bg-[#fff] rounded-[14px] text-[14px] font-[Medium] text-[#878387] cursor-pointer">
+
+                                    <SelectValue>{months[currentMonth]}</SelectValue>
+
+                                    <DateArrowIcon
+                                        stroke="#878387"
+                                    />
+
+                                </SelectTrigger>
+                                <SelectContent
+                                    className="h-[260px] cursor-pointer z-[999] bg-[#fff] w-full border border-[#e5e5e5] rounded-[14px] p-[8px] font-[Regular] text-[14px] "
+                                    style={{ width: "100%" }}
+                                >
+                                    {months.map((month, index) => (
+                                        <SelectItem
+                                            className="rounded-[12px] px-[12px] py-[8px] text-[14px]"
+                                            key={index} value={index.toString()}>
+                                            {month}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        {/* Custom Year select (2020 -> future, scrollable) */}
+                        <div className="">
+                            <Select value={currentYear.toString()} onValueChange={handleYearChange}>
+                                <SelectTrigger className="flex items-center gap-[6px] h-auto bg-[#fff] rounded-[14px] text-[14px] font-[Medium] text-[#878387] cursor-pointer">
+                                    <SelectValue>{currentYear}</SelectValue>
+                                    <DateArrowIcon
+                                        stroke="#878387"
+                                    />
+                                </SelectTrigger>
+                                <SelectContent
+                                    className="h-[260px] cursor-pointer z-[999] bg-[#fff] w-full border border-[#e5e5e5] rounded-[14px] p-[8px] font-[Regular] text-[14px] "
+                                    style={{ width: "100%" }}
+                                >
+                                    {years.map((year) => (
+                                        <SelectItem
+                                            className="rounded-[12px] px-[12px] py-[8px] text-[14px]"
+                                            key={year} value={year.toString()}>
+                                            {year}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
                     </div>
                     <div className="flex items-center gap-[12px]">
                         <button
@@ -196,9 +181,9 @@ export default function DatePickerModal({ isOpen, onClose, selectedDate, onDateS
                 {/* Calendar Grid */}
                 <div className="">
                     {/* Week Days Header */}
-                    <div className=" border-t border-b border-[rgba(0,0,0,0.1)] grid grid-cols-7 gap-[22px] mb-[12px] p-[12px_30px]">
+                    <div className=" border-t border-b border-[rgba(0,0,0,0.1)] grid grid-cols-7 gap-[2px] mb-[12px] p-[12px_30px]">
                         {weekDays.map((day, index) => (
-                            <div key={index} className="text-center text-[12px] font-[SemiBold] text-[#878387]">
+                            <div key={index} className="w-[40px] h-[20px] flex items-center justify-center text-center text-[12px] font-[SemiBold] text-[#878387]">
                                 {day}
                             </div>
                         ))}
@@ -223,30 +208,22 @@ export default function DatePickerModal({ isOpen, onClose, selectedDate, onDateS
                         {/* Current month days */}
                         {Array.from({ length: daysInMonth }, (_, i) => {
                             const date = new Date(currentYear, currentMonth, i + 1);
-                            const isSelected = isDateSelected(date);
-                            const isPrimary = isPrimarySelected(date);
-                            const inRange = isDateInRange(date);
-                            const isRangeStart = rangeStart && date.getDate() === rangeStart.getDate() && date.getMonth() === rangeStart.getMonth() && date.getFullYear() === rangeStart.getFullYear();
-                            const isRangeEnd = rangeEnd && date.getDate() === rangeEnd.getDate() && date.getMonth() === rangeEnd.getMonth() && date.getFullYear() === rangeEnd.getFullYear();
-                            const isRangeBoundary = (isRangeStart || isRangeEnd) && !isPrimary && rangeStart && rangeEnd;
+                            const isSelected =
+                                selectedDate &&
+                                date.getDate() === selectedDate.getDate() &&
+                                date.getMonth() === selectedDate.getMonth() &&
+                                date.getFullYear() === selectedDate.getFullYear();
 
                             return (
                                 <button
                                     key={`current-${i}`}
                                     onClick={() => handleDateClick(date)}
-                                    className={`w-[40px] h-[40px] flex items-center justify-center text-[14px] font-[Regular] rounded-full cursor-pointer transition-all relative ${isPrimary
-                                            ? "bg-[#FFB6C1] text-[#000]"
-                                            : inRange && !isPrimary
-                                                ? "bg-[#F8F8F8] text-[#000]"
-                                                : isSelected
-                                                    ? "bg-[#F8F8F8] text-[#000]"
-                                                    : "text-[#000] "
+                                    className={`w-[40px] h-[40px] flex items-center justify-center text-[14px] font-[Regular] rounded-full cursor-pointer transition-all relative focus:outline-none focus:border-none focus:shadow-none ${isSelected
+                                        ? "bg-[#FFB6C1] text-[#000]"
+                                        : "text-[#000]"
                                         }`}
                                 >
                                     {date.getDate()}
-                                    {isRangeBoundary && (
-                                        <div className="absolute inset-0 rounded-full border-2 border-[#000] pointer-events-none"></div>
-                                    )}
                                 </button>
                             );
                         })}

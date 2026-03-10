@@ -43,8 +43,8 @@ export default function TransactionHistory({
     return (
         <div className="">
             {/* Header with Title, Entries Select, and Search */}
-            <div className="mb-[30px]">
-                <div className="flex items-center justify-between gap-[20px] flex-1 max-sm:flex-col ">
+            <div className="mb-[20px]">
+                <div className="flex items-center justify-between gap-[20px] flex-1 max-sm:flex-col-reverse bookingtable_header">
                     <div className="flex items-center gap-[8px]">
                         <p className="text-[14px] font-[Medium] text-[#000]">Show</p>
                         <Select value={entriesPerPage} onValueChange={onEntriesPerPageChange}>
@@ -66,7 +66,7 @@ export default function TransactionHistory({
                         </Select>
                         <p className="text-[14px] font-[Medium] text-[#000]">entries</p>
                     </div>
-                    <h3 className="text-[22px] font-[Bold] text-[#000]">{title}</h3>
+                    <h3 className="max-sm:order-1 text-[22px] font-[Bold] text-[#000]">{title}</h3>
                     <div className="bg-[#EFEFEF] rounded-full p-[16px_20px] flex items-center gap-[10px]">
                         <SearchIcon className="w-[18px] h-[18px]" stroke="#000" />
                         <input
@@ -80,24 +80,24 @@ export default function TransactionHistory({
                 </div>
             </div>
             {/* Table */}
-            <div className="overflow-x-auto rounded-[30px] border border-[#E0DAF4] bg-[#fff] table_scrollbar">
+            <div className="overflow-x-auto rounded-[30px] border border-[rgba(0,0,0,0.10)] bg-[#fff] table_scrollbar">
                 <table className="w-full max-sm:w-[330vw] looqer_home_table">
                     <thead className="bg-[#EBE4EF]">
                         <tr>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">ID</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Transaction date</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Fare</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Balance for</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Type</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Balance</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Invoice</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">ID</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Transaction date</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Fare</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Balance for</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Type</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Balance</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Invoice</th>
                         </tr>
                     </thead>
                     <tbody className="border-b border-[rgba(0,0,0,0.1)] last:border-b-0 last:border-none">
                         {transactions.map((transaction, index) => (
                             <tr
                                 key={`${transaction.id}-${index}`}
-                                className="border-b border-[rgba(0,0,0,0.1)] last:border-b-0"
+                                className="border-b border-[rgba(0,0,0,0.1)] last:border-b-0 hover:bg-[#F8F8F8] "
                             >
                                 <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#878387]">
                                     {transaction.id}
@@ -113,7 +113,7 @@ export default function TransactionHistory({
                                 </td>
                                 <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#000]">
                                     <div className="border border-[rgba(0,0,0,0.1)] rounded-[5px] p-[4px_10px] w-fit">
-                                        <p className="text-[14px] font-[Regular] text-[#000]">{transaction.paymentType}</p>
+                                        <p className="text-[12px] font-[Regular] text-[#000]">{transaction.paymentType}</p>
                                     </div>
                                 </td>
                                 <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#000]">
@@ -132,7 +132,7 @@ export default function TransactionHistory({
             </div>
 
             {/* Pagination */}
-            <div className="p-[30px] flex flex-col items-center justify-between gap-[20px]">
+            <div className="pt-[30px] flex flex-col items-center justify-between gap-[20px]">
                 <nav className="flex items-center gap-[10px]">
                     <button
                         type="button"

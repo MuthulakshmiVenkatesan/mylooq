@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CloseIcon, StarIcon } from "../../../../components/customfile/icons";
+import { useLockBodyScroll } from "../../../../hooks/useLockBodyScroll";
 
 interface WriteReviewModalProps {
     isOpen: boolean;
@@ -10,6 +11,8 @@ interface WriteReviewModalProps {
 export default function WriteReviewModal({ isOpen, onClose, onSubmit }: WriteReviewModalProps) {
     const [rating, setRating] = useState<number>(4);
     const [comment, setComment] = useState<string>("");
+
+    useLockBodyScroll(isOpen);
 
     if (!isOpen) return null;
 

@@ -90,7 +90,7 @@ const pathTitles: Record<string, string> = {
     "/looqer/home": "Home",
     "/looqer/myprofile": "My Profile",
     "/looqer/services": "Services",
-    "/looqer/wallet": "Wallet",
+    "/looqer/wallet": "Wallet & Earnings",
     "/looqer/booking": "My Bookings",
     "/looqer/terms": "Terms & Conditions",
     "/looqer/privacypolicy": "Privacy Policy",

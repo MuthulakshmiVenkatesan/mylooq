@@ -72,7 +72,7 @@ function AddCard({ isOpen, onClose, onSave, initialCardData }: AddCardProps) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed top-[0] left-[0] right-[0] bottom-[0] z-50 flex items-center justify-center max-sm:px-[10px]">
+        <div className="fixed top-[0] left-[0] right-[0] bottom-[0] z-[101] flex items-center justify-center max-sm:px-[10px]">
             <div
                 className="absolute top-[0] left-[0] right-[0] bottom-[0] bg-[rgba(0,0,0,0.5)]"
                 onClick={onClose}
@@ -103,7 +103,7 @@ function AddCard({ isOpen, onClose, onSave, initialCardData }: AddCardProps) {
                         <div className="flex flex-col gap-[20px] mb-[30px]">
                             {/* Card Holder Name */}
                             <div
-                                className={`input-groups relative flex bg-[#F2F2F2] rounded-full border p-[0_24px] transition-all duration-150 ${focusedField === "holderName"
+                                className={`input-group_card relative flex bg-[#F2F2F2] rounded-full border p-[0_24px] transition-all duration-150 ${focusedField === "holderName"
                                     ? "bg-[#fff] border-[#6E2C91]"
                                     : "border-transparent"
                                     }`}
@@ -124,7 +124,7 @@ function AddCard({ isOpen, onClose, onSave, initialCardData }: AddCardProps) {
 
                             {/* Card Number */}
                             <div
-                                className={`input-groups relative flex bg-[#F2F2F2] rounded-full border p-[0_24px] transition-all duration-150 ${focusedField === "cardNumber"
+                                className={`input-group_card relative flex bg-[#F2F2F2] rounded-full border p-[0_24px] transition-all duration-150 ${focusedField === "cardNumber"
                                     ? "bg-[#fff] border-[#6E2C91]"
                                     : "border-transparent"
                                     }`}
@@ -147,7 +147,7 @@ function AddCard({ isOpen, onClose, onSave, initialCardData }: AddCardProps) {
                             <div className="flex gap-[16px]">
                                 {/* Expiry */}
                                 <div
-                                    className={`input-groups relative flex bg-[#F2F2F2] rounded-full border p-[0_24px] transition-all duration-150 flex-1 ${focusedField === "expiry"
+                                    className={`input-group_card relative flex bg-[#F2F2F2] rounded-full border p-[0_24px] transition-all duration-150 flex-1 ${focusedField === "expiry"
                                         ? "bg-[#fff] border-[#6E2C91]"
                                         : "border-transparent"
                                         }`}
@@ -169,7 +169,7 @@ function AddCard({ isOpen, onClose, onSave, initialCardData }: AddCardProps) {
 
                                 {/* CVV */}
                                 <div
-                                    className={`input-groups relative flex bg-[#F2F2F2] rounded-full border p-[0_24px] transition-all duration-150 flex-1 ${focusedField === "cvv"
+                                    className={`input-group_card relative flex bg-[#F2F2F2] rounded-full border p-[0_24px] transition-all duration-150 flex-1 ${focusedField === "cvv"
                                         ? "bg-[#fff] border-[#6E2C91]"
                                         : "border-transparent"
                                         }`}

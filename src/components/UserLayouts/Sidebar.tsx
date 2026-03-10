@@ -4,20 +4,21 @@ import { HomeIcon, ServicesIcon, NotificationIcon, LogoutIcon, HamburgerIcon, My
 import { Dialog, DialogContent, DialogOverlay } from "../Ui/Dialog";
 import logoImg from "../../assets/img/logo.png";
 import userImg from "../../assets/img/user.png";
+import NotificationDrawer from "./NotificationDrawer";
 
 const navItems = [
     { icon: <HomeIcon className="w-[22px] h-[22px]" />, path: "/user/home", label: "Home" },
     { icon: <ServicesIcon className="w-[22px] h-[22px]" />, path: "/user/services", label: "Services" },
     { icon: <MyBookingIcon className="w-[22px] h-[22px]" />, path: "/user/booking", label: "My Booking" },
     { icon: <WalletIcon className="w-[22px] h-[22px]" />, path: "/user/wallet", label: "Wallet" },
-    { icon: <NotificationIcon className="w-[22px] h-[22px]" />, path: "/home", label: "Notifications" },
+    // { icon: <NotificationIcon className="w-[22px] h-[22px]" />, path: "/home", label: "Notifications" },
 ];
 
 function Sidebar() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const location = useLocation();
     const isCheckoutRoute = location.pathname === "/user/checkout";
-
+    const [isNotificationDrawerOpen, setIsNotificationDrawerOpen] = useState(false);
     const SidebarContent = () => (
         <div className="flex flex-col items-center h-full bg-[#fff] w-[70px] p-[16px] max-sm:w-full justify-between sidebar">
             <Link to="/user/home">
@@ -32,14 +33,28 @@ function Sidebar() {
                         to={item.path}
                         end
                         className={({ isActive }) =>
-                            `flex h-[44px] w-[44px] items-center justify-center rounded-[10px] p-[6px] transition hover:bg-[#EFEFEF] ${isActive ? "bg-[#EFEFEF] " : "bg-transparent "
+                            `flex h-[44px] w-[44px] items-center justify-center rounded-[10px] p-[6px] transition hover:bg-[#EFEFEF] focus:outline-none focus:border-none focus:shadow-none ${isActive && !isNotificationDrawerOpen ? "bg-[#EFEFEF] " : "bg-transparent "
                             }`
                         }
-                        onClick={() => setIsDrawerOpen(false)}
+                        onClick={() => {
+                            setIsDrawerOpen(false);
+                            setIsNotificationDrawerOpen(false);
+                        }}
                     >
                         {item.icon}
                     </NavLink>
                 ))}
+                <button
+                    onClick={() => {
+                        setIsNotificationDrawerOpen(true);
+                        setIsDrawerOpen(false);
+                    }}
+                    className={`flex h-[44px] w-[44px] items-center justify-center rounded-[10px] p-[6px] transition cursor-pointer focus:outline-none focus:border-none focus:shadow-none ${
+                        isNotificationDrawerOpen ? "bg-[#EFEFEF]" : "bg-transparent hover:bg-[#EFEFEF]"
+                    }`}
+                >
+                    <NotificationIcon className="w-[22px] h-[22px]" />
+                </button>
             </aside>
             <div className="cursor-pointer mb-[20px]">
                 <LogoutIcon className="w-[20px] h-[20px]" />
@@ -72,9 +87,10 @@ function Sidebar() {
             </div>
 
             {/* Desktop Sidebar */}
-            <div className="hidden lg:flex flex-col items-center h-[100vh] bg-[#fff] border-r border-[rgba(0,0,0,0.1)] fixed max-sm:w-full ">
+            <div className="hidden lg:flex flex-col items-center h-[100vh] bg-[#fff] border-r border-[rgba(0,0,0,0.1)] fixed max-sm:w-full z-[100]">
                 <SidebarContent />
             </div>
+            <NotificationDrawer isOpen={isNotificationDrawerOpen} onClose={() => setIsNotificationDrawerOpen(false)} />
         </>
     );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { CalendarIcon } from "../../../components/customfile/icons";
 import { Tabs, TabsList, TabsTrigger } from "../../../components/Ui/Tabs";
 import DatePickerModal from "./components/DatePickerModal";
 import TransactionHistory, { type Transaction } from "./components/TransactionHistory";
@@ -64,7 +64,7 @@ export default function UserWallet() {
     return (
         <>
             <div className="bg-[#fff] mt-[70px]">
-                <div className="px-5 lg:px-[75px] py-[80px] common_p_80 max-sm:py-[0px_40px] max-w-[1230px] mx-auto w-full">
+                <div className="px-5 lg:px-[75px] py-[80px] common_p_80 max-sm:py-[0px_40px] max-w-[1230px] mx-auto w-full user_container">
                     {/* Earnings Summary */}
                     <div className="flex items-center justify-center gap-[80px] mb-[40px] max-sm:flex-col border-b border-[rgba(0,0,0,0.10)] pb-[40px] max-sm:gap-[20px]">
                         <div className="text-center">
@@ -74,12 +74,12 @@ export default function UserWallet() {
                     </div>
 
                     <div className="flex items-center justify-center mb-[30px] flex-wrap max-sm:gap-[10px] booking_tabs">
-                        <div className="max-sm:overflow-x-auto max-sm:w-[calc(100vw-32px)] hide-scrollbar">
-                            <Tabs value={activeTab} onValueChange={setActiveTab} className="bg-[#F8F8F8] rounded-full p-[4px] max-sm:w-fit">
-                                <TabsList className="flex gap-[6px] bg-transparent p-0">
+                        <div className="">
+                            <Tabs value={activeTab} onValueChange={setActiveTab} className="">
+                                <TabsList className="flex gap-[6px] max-sm:w-[95vw] max-sm:overflow-x-auto hide-scrollbar bg-[#F8F8F8] rounded-full p-[4px]">
                                     <TabsTrigger
                                         value="all-transactions"
-                                        className={`px-[79px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "all-transactions"
+                                        className={`flex flex-shrink-0 wallettab_buttons px-[79px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "all-transactions"
                                             ? "bg-[#000] text-[#fff]"
                                             : "bg-[#fff] text-[#000] shadow-[0px_4px_15px_rgba(0,0,0,0.1)]"
                                             }`}
@@ -88,7 +88,7 @@ export default function UserWallet() {
                                     </TabsTrigger>
                                     <TabsTrigger
                                         value="card-payments"
-                                        className={`px-[79px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "card-payments"
+                                        className={`flex flex-shrink-0 wallettab_buttons px-[79px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "card-payments"
                                             ? "bg-[#000] text-[#fff]"
                                             : "bg-[#fff] text-[#000] shadow-[0px_4px_15px_rgba(0,0,0,0.1)]"
                                             }`}
@@ -97,7 +97,7 @@ export default function UserWallet() {
                                     </TabsTrigger>
                                     <TabsTrigger
                                         value="cash-payments"
-                                        className={`px-[79px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "cash-payments"
+                                        className={`flex flex-shrink-0 wallettab_buttons px-[79px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "cash-payments"
                                             ? "bg-[#000] text-[#fff]"
                                             : "bg-[#fff] text-[#000] shadow-[0px_4px_15px_rgba(0,0,0,0.1)]"
                                             }`}
@@ -110,7 +110,7 @@ export default function UserWallet() {
 
                         {/* Date Filter */}
                         <div
-                            className="flex items-center gap-[10px] bg-[#F8F8F8] p-[12px_20px] rounded-full justify-between cursor-pointer max-sm:w-full"
+                            className="flex items-center gap-[10px] bg-[#F8F8F8] p-[12px_20px] rounded-full justify-between cursor-pointer max-sm:w-full datediv"
                             onClick={() => setIsDatePickerOpen(true)}
                         >
                             <div className="flex flex-col gap-[2px] ">
@@ -124,7 +124,7 @@ export default function UserWallet() {
                                     />
                                 </div>
                             </div>
-                            <CalendarIcon className="w-[18px] h-[18px]" />
+                            <CalendarIcon className="w-[20px] h-[20px]" />
                         </div>
                     </div>
 

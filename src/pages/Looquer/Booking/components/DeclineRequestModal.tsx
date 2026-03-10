@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "../../../../components/Ui/Select";
 import { CloseIcon, ArrowDownIcon } from "../../../../components/customfile/icons";
+import { useLockBodyScroll } from "../../../../hooks/useLockBodyScroll";
 import RequestDeclinedModal from "./RequestDeclinedModal";
 
 interface DeclineRequestModalProps {
@@ -47,6 +48,8 @@ export default function DeclineRequestModal({ isOpen, onClose, onConfirm }: Decl
         onClose();
     };
 
+    useLockBodyScroll(isOpen || showSuccessModal);
+
     if (!isOpen) return null;
 
     return (
@@ -73,10 +76,10 @@ export default function DeclineRequestModal({ isOpen, onClose, onConfirm }: Decl
                         {/* Reason Dropdown */}
                         <div className="mb-[40px]">
                             <Select value={selectedReason} onValueChange={setSelectedReason}>
-                                <SelectTrigger className="cursor-pointer flex items-center justify-between rounded-[50px] bg-[#EFEFEF] p-[12px_30px] border-none shadow-none focus:outline-none w-full cursor-pointer">
+                                <SelectTrigger className="cursor-pointer flex items-center justify-between rounded-[50px] bg-[#EFEFEF] p-[12px_20px] border-none shadow-none focus:outline-none w-full cursor-pointer">
                                     <div className="text-left w-full">
-                                        <label className="text-left text-[12px] font-[Regular] text-[#878387]">Work location</label>
-                                        <p className="text-[14px] font-[SemiBold] text-[#000] m-[0px]">
+                                        <label className="text-left text-[12px] font-[Regular] text-[#878387]">Select a reason</label>
+                                        <p className="text-[14px] font-[SemiBold] text-[#000] m-[0px] truncate w-[280px]">
                                             <SelectValue />
                                         </p>
                                     </div>

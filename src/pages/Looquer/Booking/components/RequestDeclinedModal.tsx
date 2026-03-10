@@ -1,4 +1,5 @@
 import { CloseIcon } from "../../../../components/customfile/icons";
+import { useLockBodyScroll } from "../../../../hooks/useLockBodyScroll";
 
 interface RequestDeclinedModalProps {
     isOpen: boolean;
@@ -6,6 +7,8 @@ interface RequestDeclinedModalProps {
 }
 
 export default function RequestDeclinedModal({ isOpen, onClose }: RequestDeclinedModalProps) {
+    useLockBodyScroll(isOpen);
+
     if (!isOpen) return null;
 
     return (

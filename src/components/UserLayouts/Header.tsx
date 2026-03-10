@@ -103,12 +103,12 @@ const pathTitles: Record<string, string> = {
     "/user/providerdetail": "Provider",
     "/user/cart": "Cart",
     "/user/services": "Services",
-    "/looqer/home": "Home",
+    "/user/booking" : "My bookings",
+    "/user/wallet" : "Wallet",
 };
 
 const Header = () => {
     const location = useLocation();
-    const currentTitle = pathTitles[location.pathname] ?? "Home";
     const [language, setLanguage] = useState("en");
     const [currency, setCurrency] = useState("USD");
     const [isScrolled, setIsScrolled] = useState(false);
@@ -159,6 +159,17 @@ const Header = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [isLanguageDropdownOpen, isCurrencyDropdownOpen]);
+
+
+    const getCurrentTitle = () => {
+        // Check if pathname matches booking detail route pattern
+        if (location.pathname.startsWith("/user/booking/") && location.pathname !== "/user/booking") {
+            return "My Bookings";
+        }
+        return pathTitles[location.pathname] ?? "Home";
+    };
+    
+    const currentTitle = getCurrentTitle();
 
     return (
         <header

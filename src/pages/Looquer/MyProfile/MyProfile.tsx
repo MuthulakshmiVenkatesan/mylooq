@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { StarIcon, RefreshIcon, EmailIcon, PhoneIcon, EditIcon } from "../../../components/customfile/icons";
+import { StarIcon, RefreshIcon, EmailIcon, PhoneIcon, EditIcon, CloseIcon1, TickIcon } from "../../../components/customfile/icons";
 import userImg from "../../../assets/img/user.png";
 import EditProfileModal from "./components/EditProfileModal";
 
@@ -59,13 +59,39 @@ export default function MyProfile() {
                         <div className="w-fit mx-auto max-sm:w-full">
                             <div className="border border-[rgba(0,0,0,0.10)] rounded-[30px] py-[30px] flex justify-center max-sm:flex-col gap-[40px] max-sm:gap-[20px] profilestatus_div">
                                 {/* Account Status */}
-                                <div className="profilestatus_subdiv px-[30px] flex items-center text-center gap-[12px] max-sm:px-[20px]">
-                                    <div className="flex items-center justify-center bg-[#E88FA0] p-[16px] rounded-full">
-                                        <RefreshIcon className="w-[20px] h-[20px]" />
+                                <div className="hidden">
+                                    <div className="profilestatus_subdiv px-[30px] flex items-center text-center gap-[12px] max-sm:px-[20px]">
+                                        <div className="flex items-center justify-center bg-[#E88FA0] p-[16px] rounded-full">
+                                            <RefreshIcon className="w-[20px] h-[20px]" />
+                                        </div>
+                                        <div className="text-left flex flex-col items-start gap-[2px]">
+                                            <p className="text-[12px] font-[Regular] text-[#878387]">Account status</p>
+                                            <h4 className="text-[14px] font-[SemiBold] text-[#000]">Admin Verifying</h4>
+                                        </div>
                                     </div>
-                                    <div className="text-left flex flex-col items-start gap-[2px]">
-                                        <p className="text-[12px] font-[Regular] text-[#878387]">Account status</p>
-                                        <h4 className="text-[14px] font-[SemiBold] text-[#000]">Admin Verifying</h4>
+                                </div>
+
+                                <div className="hidden">
+                                    <div className="profilestatus_subdiv px-[30px] flex items-center text-center gap-[12px] max-sm:px-[20px]">
+                                        <div className="flex items-center justify-center bg-[#D33333] p-[16px] rounded-full">
+                                            <CloseIcon1 className="w-[20px] h-[20px]" fill="#fff" />
+                                        </div>
+                                        <div className="text-left flex flex-col items-start gap-[2px]">
+                                            <p className="text-[12px] font-[Regular] text-[#878387]">Account status</p>
+                                            <h4 className="text-[14px] font-[SemiBold] text-[#000]">Admin Denied</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div className="profilestatus_subdiv px-[30px] flex items-center text-center gap-[12px] max-sm:px-[20px]">
+                                        <div className="flex items-center justify-center bg-[#00C299] p-[16px] rounded-full">
+                                            <TickIcon className="w-[20px] h-[20px]" fill="#fff" strokeWidth="1"/>
+                                        </div>
+                                        <div className="text-left flex flex-col items-start gap-[2px]">
+                                            <p className="text-[12px] font-[Regular] text-[#878387]">Account status</p>
+                                            <h4 className="text-[14px] font-[SemiBold] text-[#000]">Admin Denied</h4>
+                                        </div>
                                     </div>
                                 </div>
 

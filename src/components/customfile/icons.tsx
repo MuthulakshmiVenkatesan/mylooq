@@ -280,10 +280,29 @@ export function DateArrowIcon({ ...props }) {
 
 export function DownloadIcon({ ...props }) {
   return (
-    <svg className={props.className} xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-      <path d="M0.75 8.49194V14.1371C0.75 14.5649 0.91993 14.9751 1.22241 15.2776C1.52489 15.5801 1.93513 15.75 2.3629 15.75H13.6532C14.081 15.75 14.4912 15.5801 14.7937 15.2776C15.0962 14.9751 15.2661 14.5649 15.2661 14.1371V8.49194" stroke="#6E2C91" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M4.70312 8.49194L8.00958 11.7177L11.316 8.49194" stroke="#6E2C91" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M8.00781 0.75V10.0242" stroke="#6E2C91" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <svg className={props.className} xmlns="http://www.w3.org/2000/svg" width={props.width || "17"} height={props.height || "17"} viewBox="0 0 17 17" fill="none">
+      <path d="M0.75 8.49194V14.1371C0.75 14.5649 0.91993 14.9751 1.22241 15.2776C1.52489 15.5801 1.93513 15.75 2.3629 15.75H13.6532C14.081 15.75 14.4912 15.5801 14.7937 15.2776C15.0962 14.9751 15.2661 14.5649 15.2661 14.1371V8.49194" stroke={props.stroke || "#6E2C91"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M4.70312 8.49194L8.00958 11.7177L11.316 8.49194" stroke={props.stroke || "#6E2C91"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M8.00781 0.75V10.0242" stroke={props.stroke || "#6E2C91"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+
+export function CloseIcon1({ ...props }) {
+  return (
+    <svg className={props.className} xmlns="http://www.w3.org/2000/svg" width={props.width || "20"} height={props.height || "20"} viewBox="0 0 20 20" fill="none">
+      <path d="M1 19L19 1" stroke={props.stroke || "white"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M1 1L19 19" stroke={props.stroke || "white"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+
+export function CalendarIcon({ ...props }) {
+  return (
+    <svg className={props.className} xmlns="http://www.w3.org/2000/svg" width={props.width || "19"} height={props.height || "21"} viewBox="0 0 19 21" fill="none">
+      <path d="M15.9329 2.94507H2.55894C2.0795 2.94614 1.62002 3.13707 1.28101 3.47608C0.941996 3.81509 0.751074 4.27458 0.75 4.75401V18.128C0.751074 18.6074 0.941996 19.0669 1.28101 19.4059C1.62002 19.7449 2.0795 19.9359 2.55894 19.9369H15.9329C16.4124 19.9359 16.8718 19.7449 17.2109 19.4059C17.5499 19.0669 17.7408 18.6074 17.7419 18.128V4.75401C17.7408 4.27458 17.5499 3.81509 17.2109 3.47608C16.8718 3.13707 16.4124 2.94614 15.9329 2.94507Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
+      <path d="M6.625 0.75V4.73374" stroke={props.stroke || "black"} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
+      <path d="M11.8672 0.75V4.73374" stroke={props.stroke || "black"} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
     </svg>
   )
 }

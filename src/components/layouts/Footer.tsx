@@ -16,7 +16,7 @@ function Footer() {
             key={link.label}
             to={link.to}
             className={`text-[14px] font-[Regular] text-[#000] m-[0] no-underline pr-[12px] ${
-              index < list.length - 1 ? "border-r border-[#000] pr-[20px] mr-[10px]" : "pr-0 mr-0"
+              index < list.length - 1 ? "border-r border-[#000] pr-[20px] mr-[20px]" : "pr-0 mr-0"
             }`}
           >
             {link.label}

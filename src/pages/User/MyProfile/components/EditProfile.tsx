@@ -37,7 +37,7 @@ export default function EditProfile() {
         <>
            <div className="bg-[#fff] mt-[70px]">
            <div className="px-5 lg:px-[75px] py-[80px] common_p_80 max-sm:py-[0px_40px] max-w-[1230px] mx-auto w-full">
-                    <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full">
+                    <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full ">
 
                         <div className="max-w-[600px] mx-auto w-full">
                             {/* Title */}

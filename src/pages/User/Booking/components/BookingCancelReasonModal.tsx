@@ -1,4 +1,5 @@
 import { CloseIcon } from "../../../../components/customfile/icons";
+import { useLockBodyScroll } from "../../../../hooks/useLockBodyScroll";
 
 interface BookingCancelReasonModalProps {
     isOpen: boolean;
@@ -6,6 +7,8 @@ interface BookingCancelReasonModalProps {
 }
 
 export default function BookingCancelReasonModal({ isOpen, onClose }: BookingCancelReasonModalProps) {
+    useLockBodyScroll(isOpen);
+
     if (!isOpen) return null;
 
     return (

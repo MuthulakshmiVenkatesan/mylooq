@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "../../../components/Ui/Tabs";
-import { CalendarIcon } from "@radix-ui/react-icons";
 import BookingTable, { type BookingRequest } from "./components/BookingTable";
 import DatePickerModal from "./components/DatePickerModal";
+import { CalendarIcon } from "../../../components/customfile/icons";
 
 const mockBookingRequests: BookingRequest[] = [
     {
@@ -242,7 +242,7 @@ const mockPastBookings: BookingRequest[] = [
         payment: "$20.00",
         status: "Completed",
     },
-    
+
     {
         id: "#SB32323313141",
         customer: "Daisy johnson",
@@ -284,15 +284,15 @@ export default function UserBooking() {
 
     return (
         <div className="bg-[#fff] mt-[70px]">
-            <div className="px-5 lg:px-[75px] py-[80px] common_p_80 max-sm:py-[0px_40px] max-w-[1230px] mx-auto w-full">
+            <div className="px-5 lg:px-[75px] py-[80px] common_p_80 max-sm:py-[0px_40px] max-w-[1230px] mx-auto w-full user_container">
                 {/* Tabs and Date Filter */}
                 <div className="flex items-center justify-center mb-[30px] flex-wrap max-sm:gap-[10px] booking_tabs">
-                    <div className="max-sm:overflow-x-auto max-sm:w-[calc(100vw-32px)] hide-scrollbar">
-                        <Tabs value={activeTab} onValueChange={setActiveTab} className="bg-[#F8F8F8] rounded-full p-[4px] max-sm:w-fit">
-                            <TabsList className="flex gap-[6px] bg-transparent p-0">
+                    <div className="">
+                        <Tabs value={activeTab} onValueChange={setActiveTab} className="">
+                            <TabsList className="flex gap-[6px] max-sm:w-[95vw] max-sm:overflow-x-auto hide-scrollbar bg-[#F8F8F8] rounded-full p-[4px]">
                                 <TabsTrigger
                                     value="booking-requests"
-                                    className={`px-[73px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "booking-requests"
+                                    className={`flex flex-shrink-0 px-[73px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer bookingtab_buttons ${activeTab === "booking-requests"
                                         ? "bg-[#000] text-[#fff]"
                                         : "bg-[#fff] text-[#000] shadow-[0px_4px_15px_rgba(0,0,0,0.1)]"
                                         }`}
@@ -301,7 +301,7 @@ export default function UserBooking() {
                                 </TabsTrigger>
                                 <TabsTrigger
                                     value="upcoming-bookings"
-                                    className={`px-[73px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "upcoming-bookings"
+                                    className={`flex flex-shrink-0 px-[73px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer bookingtab_buttons ${activeTab === "upcoming-bookings"
                                         ? "bg-[#000] text-[#fff]"
                                         : "bg-[#fff] text-[#000] shadow-[0px_4px_15px_rgba(0,0,0,0.1)]"
                                         }`}
@@ -310,7 +310,7 @@ export default function UserBooking() {
                                 </TabsTrigger>
                                 <TabsTrigger
                                     value="past-bookings"
-                                    className={`px-[73px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer ${activeTab === "past-bookings"
+                                    className={`flex flex-shrink-0 px-[73px] py-[18px] max-sm:p-[16px_30px] rounded-full text-[14px] font-[SemiBold] border-none transition-all cursor-pointer bookingtab_buttons ${activeTab === "past-bookings"
                                         ? "bg-[#000] text-[#fff]"
                                         : "bg-[#fff] text-[#000] shadow-[0px_4px_15px_rgba(0,0,0,0.1)]"
                                         }`}
@@ -323,7 +323,7 @@ export default function UserBooking() {
 
                     {/* Date Filter */}
                     <div
-                        className="flex items-center gap-[10px] bg-[#F8F8F8] p-[12px_20px] rounded-full justify-between cursor-pointer max-sm:w-full"
+                        className="flex items-center gap-[10px] bg-[#F8F8F8] p-[12px_20px] rounded-full justify-between cursor-pointer max-sm:w-full datediv"
                         onClick={() => setIsDatePickerOpen(true)}
                     >
                         <div className="flex flex-col gap-[2px] ">
@@ -337,7 +337,7 @@ export default function UserBooking() {
                                 />
                             </div>
                         </div>
-                        <CalendarIcon className="w-[18px] h-[18px]" />
+                        <CalendarIcon className="w-[20px] h-[20px]" />
                     </div>
                 </div>
 

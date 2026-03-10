@@ -6,6 +6,8 @@ import DeclineRequestModal from "./DeclineRequestModal";
 import PaySummaryModal from "./PaySummaryModal";
 import WriteReviewModal from "./WriteReviewModal";
 import AdditionalChargesModal from "./AdditionalChargesModal";
+import CancelBookingModal from "./CancelBookingModal";
+import SpecialInstructionModal from "./SpecialInstructionModal";
 
 export interface BookingDetailData {
     id: string;
@@ -189,10 +191,20 @@ export default function BookingDetail() {
     const [isAdditionalChargesModalOpen, setIsAdditionalChargesModalOpen] = useState(false);
     const [serviceStatus, setServiceStatus] = useState<"arrived" | "ready" | "started" | "ended">("arrived");
     const [isPaymentReady, setIsPaymentReady] = useState(false);
-
+    const [hasAccepted, setHasAccepted] = useState(false);
+    const [isCancelBookingModalOpen, setIsCancelBookingModalOpen] = useState(false);
+    const [collectedPaymentMode, setCollectedPaymentMode] = useState<string | null>(null);
+    const [collectedTotalPay, setCollectedTotalPay] = useState<string | null>(null);
+    const [hasJobCompleted, setHasJobCompleted] = useState(false);
     // Get booking details - in real app, fetch from API
     const decodedBookingId = bookingId ? decodeURIComponent(bookingId) : null;
     const booking = decodedBookingId ? mockBookingDetails[decodedBookingId] : null;
+    const [isSpecialInstructionModalOpen, setIsSpecialInstructionModalOpen] = useState(false);
+    const [selectedInstructionCategory, setSelectedInstructionCategory] = useState<string | null>(null);
+    const handleSpecialInstruction = (category: string) => {
+        setSelectedInstructionCategory(category);
+        setIsSpecialInstructionModalOpen(true);
+    };
 
     if (!booking) {
         return (
@@ -210,6 +222,7 @@ export default function BookingDetail() {
     const handleAccept = () => {
         // Handle accept logic
         console.log("Accept booking:", booking.id);
+        setHasAccepted(true);
         // Navigate back or update status
     };
 
@@ -255,20 +268,24 @@ export default function BookingDetail() {
         // Set payment ready state to show "Collect payment" button
         setIsPaymentReady(true);
         setServiceStatus("ended");
+        setCollectedTotalPay(`$${finalAmount.toFixed(2)}`);
+        setCollectedPaymentMode(booking.paymentMode || "Cash");
         // You can add API call here to submit the charges
     };
 
-    // const handleCollectPayment = () => {
-    //     // Handle collect payment logic
-    //     console.log("Collect payment:", booking.id);
-    //     // You can add API call here to process payment
-    // };
+    const handleCollectPayment = () => {
+        // Handle collect payment logic
+        console.log("Collect payment:", booking.id);
+        if (!collectedPaymentMode) {
+            // Default payment mode; in real app this would come from user input
+            setCollectedPaymentMode("Cash");
+        }
+        // You can add API call here to process payment
+        setIsWriteReviewModalOpen(true);
+    };
 
     const handleCancelBooking = () => {
-        // Handle cancel booking logic
-        console.log("Cancel booking:", booking.id);
-        // Show cancel confirmation modal or directly cancel
-        // Navigate back or update status
+        setIsCancelBookingModalOpen(true);
     };
 
     // Check if this is an upcoming booking (not a new booking request)
@@ -288,8 +305,8 @@ export default function BookingDetail() {
                 ))}
                 {hasHalfStar && (
                     <div className="relative w-[12px] h-[11px]">
-                        <StarIcon className="w-[12px] h-[11px]" fill="#878387" />
-                        <div className="absolute inset-0 overflow-hidden w-1/2">
+                        <div className="absolute inset-0 overflow-hidden ">
+                            <StarIcon className="w-[12px] h-[11px]" fill="#878387" />
                             <StarIcon className="w-[12px] h-[11px]" fill="#878387" />
                         </div>
                     </div>
@@ -307,10 +324,10 @@ export default function BookingDetail() {
     return (
         <div className="min-h-[100vh] max-sm:min-h-auto main_height ">
             <div className="bg-[#fff] pb-[80px] pt-[80px] max-sm:py-[30px]">
-                <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full">
+                <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full looqer_home_container max-sm:px-[15px]">
                     {/* Header */}
                     <div className="flex items-center justify-between mb-[20px]">
-                        <h1 className="text-[18px] font-[Bold] text-[#878387]">{booking.id}</h1>
+                        <h1 className="text-[24px] font-[Bold] text-[#878387]">{booking.id}</h1>
                         <Link
                             to="/looqer/booking"
                             className="flex items-center gap-[4px] text-[14px] font-[SemiBold] text-[#000] cursor-pointer "
@@ -323,8 +340,8 @@ export default function BookingDetail() {
                     {/* Main Card */}
                     <div className="">
                         {/* Customer Information Section */}
-                        <div className="p-[30px] border border-[rgba(0,0,0,0.1)] rounded-[30px] max-sm:p-[20px] mb-[40px]">
-                            <div className="flex items-center justify-between max-sm:flex-col flex-wrap gap-[10px]">
+                        <div className="p-[30px] border border-[rgba(0,0,0,0.1)] rounded-[30px] max-sm:p-[20px] mb-[40px] bookingdetail_profile">
+                            <div className="flex items-center justify-between max-sm:flex-col flex-wrap gap-[10px] max-sm:items-start bookingdetail_profile_sub">
                                 {/* Customer Profile */}
                                 <div className="flex items-center gap-[12px] flex-shrink-0">
                                     <div className="w-[80px] h-[80px] rounded-full overflow-hidden">
@@ -346,13 +363,13 @@ export default function BookingDetail() {
                                 </div>
 
                                 {/* Contact Details */}
-                                <div className="flex items-center gap-[40px] max-sm:flex-col max-sm:items-start max-sm:gap-[20px]">
-                                    <div className="flex items-center gap-[14px] flex-1">
+                                <div className="flex items-center gap-[40px] max-sm:flex-col max-sm:items-start max-sm:gap-[20px] bookingdetail_profile_sub">
+                                    <div className="flex items-center gap-[14px]">
                                         <div className="p-[16px] rounded-full bg-[#F8F8F8] flex items-center justify-center flex-shrink-0">
                                             <PhoneIcon className="w-[20px] h-[20px]" />
                                         </div>
                                         <div>
-                                            <p className="text-[12px] font-[Regular] text-[#878387] mb-[4px]">
+                                            <p className="text-[12px] font-[Regular] text-[#878387] mb-[2px]">
                                                 Phone number
                                             </p>
                                             <h4 className="text-[14px] font-[SemiBold] text-[#000]">
@@ -361,17 +378,17 @@ export default function BookingDetail() {
                                         </div>
                                     </div>
 
-                                    <div className="w-[1px] h-[50px] bg-[rgba(0,0,0,0.10)] max-sm:hidden"></div>
+                                    <div className="w-[1px] h-[50px] bg-[rgba(0,0,0,0.10)] max-sm:hidden bookingdetail_divider"></div>
 
                                     <div className="flex items-center gap-[14px] flex-1">
                                         <div className="p-[16px] rounded-full bg-[#F8F8F8] flex items-center justify-center flex-shrink-0">
                                             <EmailIcon className="w-[20px] h-[20px]" />
                                         </div>
                                         <div>
-                                            <p className="text-[12px] font-[Regular] text-[#878387] mb-[4px]">
+                                            <p className="text-[12px] font-[Regular] text-[#878387] mb-[2px]">
                                                 Email address
                                             </p>
-                                            <h4 className="text-[14px] font-[SemiBold] text-[#000]">
+                                            <h4 className="text-[14px] font-[SemiBold] text-[#000] break-all">
                                                 {booking.email}
                                             </h4>
                                         </div>
@@ -384,16 +401,19 @@ export default function BookingDetail() {
                         <div className="">
                             {/* Booked Services */}
                             <div className="mb-[20px]">
-                                <h3 className="text-[12px] font-[Regular] text-[#878387] mb-[12px]">
+                                <h3 className="text-[12px] font-[Regular] text-[#878387] mb-[10px]">
                                     Booked services
                                 </h3>
-                                <div className="flex flex-col gap-[6px]">
+                                <div className="flex flex-col gap-[6px] max-sm:gap-[10px]">
                                     {booking.services.map((serviceGroup, index) => (
-                                        <div key={index} className="flex items-center gap-[8px]">
+                                        <div key={index} className="flex items-center gap-[8px] max-sm:flex-col max-sm:items-start">
                                             <p className="text-[14px] font-[SemiBold] text-[#000] ">
                                                 {serviceGroup.category} -
                                             </p>
-                                            <div className="flex flex-wrap gap-[6px]">
+                                            <div
+                                                className="flex flex-wrap gap-[6px] cursor-pointer"
+                                                onClick={() => handleSpecialInstruction(serviceGroup.category)}
+                                            >
                                                 {serviceGroup.items.map((service, serviceIndex) => (
                                                     <p
                                                         key={serviceIndex}
@@ -428,21 +448,21 @@ export default function BookingDetail() {
                                 </p>
                             </div>
 
-                            {/* Payment Mode - Show for past bookings */}
-                            {isPastBooking && booking.paymentMode && (
+                            {/* Payment Mode - Show for past bookings or after collecting payment */}
+                            {((isPastBooking && booking.paymentMode) || collectedPaymentMode) && (
                                 <div className="mb-[30px]">
                                     <h3 className="text-[12px] font-[Regular] text-[#878387] mb-[2px]">
                                         Payment mode
                                     </h3>
                                     <p className="text-[14px] font-[SemiBold] text-[#000]">
-                                        {booking.paymentMode}
+                                        {booking.paymentMode || collectedPaymentMode}
                                     </p>
                                 </div>
                             )}
 
-                            {/* Total Pay - Show for past bookings, Estimated Service Price for others */}
-                            {isPastBooking ? (
-                                booking.totalPay && (
+                            {/* Total Pay - Show for past bookings or after collecting payment; Estimated Service Price for others */}
+                            {isPastBooking || collectedTotalPay ? (
+                                (booking.totalPay || collectedTotalPay) && (
                                     <div className="mb-[30px]">
                                         <div className="flex items-center gap-[4px]">
                                             <h3 className="text-[12px] font-[Regular] text-[#878387] mb-[2px]">
@@ -454,7 +474,7 @@ export default function BookingDetail() {
                                         </div>
                                         <div className="flex items-center gap-[8px]">
                                             <p className="text-[14px] font-[SemiBold] text-[#000]">
-                                                {booking.totalPay}
+                                                {booking.totalPay || collectedTotalPay}
                                             </p>
                                         </div>
                                     </div>
@@ -477,22 +497,30 @@ export default function BookingDetail() {
                         {isPastBooking ? (
                             <div className="mt-[40px]">
                                 <button
-                                    className="p-[14px_30px] bg-[#00C299] text-[#FFF] rounded-full text-[14px] font-[Bold] transition-colors cursor-pointer"
+                                    className="p-[14px_30px] bg-[#00C299] text-[#FFF] rounded-full text-[14px] font-[Bold] transition-colors"
                                 >
                                     The job was successfully completed
                                 </button>
                             </div>
                         ) : (
-                            <div className="flex gap-[16px] max-sm:flex-col mt-[40px]">
+                            <div className="flex gap-[10px] max-sm:flex-col mt-[40px]">
                                 {isUpcomingBooking ? (
                                     <>
                                         {isPaymentReady ? (
-                                            <button
-                                                onClick={() => setIsWriteReviewModalOpen(true)}
-                                                className="p-[14px_30px] bg-[#6E2C91] text-[#FFF] rounded-full text-[14px] font-[Bold] transition-colors cursor-pointer"
-                                            >
-                                                Collect payment
-                                            </button>
+                                            hasJobCompleted ? (
+                                                <button
+                                                    className="p-[14px_30px] bg-[#00C299] text-[#FFF] rounded-full text-[14px] font-[Bold] transition-colors"
+                                                >
+                                                    The job was successfully completed
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={handleCollectPayment}
+                                                    className="p-[14px_30px] bg-[#6E2C91] text-[#FFF] rounded-full text-[14px] font-[Bold] transition-colors cursor-pointer"
+                                                >
+                                                    Collect payment
+                                                </button>
+                                            )
                                         ) : (
                                             <>
                                                 {serviceStatus === "arrived" ? (
@@ -512,7 +540,7 @@ export default function BookingDetail() {
                                                 ) : serviceStatus === "started" ? (
                                                     <button
                                                         onClick={handleEndService}
-                                                        className="p-[14px_30px] bg-[#6E2C91] text-[#FFF] rounded-full text-[14px] font-[Bold] transition-colors cursor-pointer"
+                                                        className="p-[14px_30px] bg-[#000] text-[#FFF] rounded-full text-[14px] font-[Bold] transition-colors cursor-pointer"
                                                     >
                                                         End service
                                                     </button>
@@ -532,13 +560,13 @@ export default function BookingDetail() {
                                             onClick={handleAccept}
                                             className="p-[14px_30px] bg-[#6E2C91] text-[#FFF] rounded-full text-[14px] font-[Bold] transition-colors cursor-pointer"
                                         >
-                                            Accept request
+                                            {hasAccepted ? "Set as Arrived" : "Accept request"}
                                         </button>
                                         <button
-                                            onClick={handleDecline}
+                                            onClick={hasAccepted ? handleCancelBooking : handleDecline}
                                             className="p-[14px_30px] bg-[#fff] text-[#000] border border-[#000] rounded-full text-[14px] font-[Bold] transition-colors cursor-pointer"
                                         >
-                                            Decline request
+                                            {hasAccepted ? "Cancel booking" : "Decline request"}
                                         </button>
                                     </>
                                 )}
@@ -555,8 +583,8 @@ export default function BookingDetail() {
                 onConfirm={handleDeclineConfirm}
             />
 
-            {/* Pay Summary Modal */}
-            {isPastBooking && booking && (
+            {/* Pay Summary Modal - show for past bookings or when payment is collected (Collect payment flow) */}
+            {(isPastBooking || isPaymentReady) && booking && (
                 <PaySummaryModal
                     isOpen={isPaySummaryModalOpen}
                     onClose={() => setIsPaySummaryModalOpen(false)}
@@ -578,7 +606,10 @@ export default function BookingDetail() {
                 <WriteReviewModal
                     isOpen={isWriteReviewModalOpen}
                     onClose={() => setIsWriteReviewModalOpen(false)}
-                    onSubmit={() => { }}
+                    onSubmit={() => {
+                        setHasJobCompleted(true);
+                        setIsWriteReviewModalOpen(false);
+                    }}
                 />
             )}
 
@@ -610,6 +641,19 @@ export default function BookingDetail() {
                     />
                 );
             })()}
+
+            {/* Cancel Booking Modal */}
+            <CancelBookingModal
+                isOpen={isCancelBookingModalOpen}
+                onClose={() => setIsCancelBookingModalOpen(false)}
+                onConfirm={handleCancelBooking}
+            />
+
+            <SpecialInstructionModal
+                isOpen={isSpecialInstructionModalOpen}
+                onClose={() => setIsSpecialInstructionModalOpen(false)}
+                category={selectedInstructionCategory}
+            />
         </div>
     );
 }

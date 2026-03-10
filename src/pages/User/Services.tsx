@@ -74,7 +74,7 @@ export default function Services() {
 
   return (
     <div className="bg-[#fff] mt-[70px]">
-      <div className="px-5 lg:px-[75px] py-[80px] common_p_80 max-sm:py-[0px_40px] max-w-[1230px] mx-auto w-full">
+      <div className="px-5 lg:px-[75px] py-[80px] common_p_80 max-sm:py-[0px_40px] max-w-[1230px] mx-auto w-full user_container">
         {/* Header Section */}
         <div className="text-center mb-[40px] max-sm:mb-[30px]">
           <h1 className="text-[32px] font-[Bold] text-[#000] mb-[6px] max-sm:text-[24px]">

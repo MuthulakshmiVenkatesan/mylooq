@@ -41,6 +41,12 @@ body {
     background: #fff;
 }
 
+/* Prevent background scroll when modal is open */
+html.modal-open,
+body.modal-open {
+    overflow: hidden;
+}
+
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -85,6 +91,17 @@ body {
 
 @media screen and (min-width: 1920px) and (max-width: 2560px) {
 
+    .notification_drawer {
+        left: 80px !important;
+    }
+
+    .bookingtab_buttons {
+        padding: 18px 91px !important;
+    }
+
+    .wallettab_buttons {
+        padding: 18px 97px !important;
+    }
 
     .cart_foot {
         padding: 40px 0;
@@ -322,7 +339,64 @@ body {
     border-radius: 30px;
 }
 
+.input-group_card {
+    position: relative;
+}
+
+/* Input */
+.input-group_card input {
+    width: 100%;
+    padding: 18px 0px;
+    font-size: 16px;
+    outline: none;
+}
+
+
+
+/* Label default position */
+.input-group_card label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+/* Move label on focus OR when input has value */
+.input-group_card input:focus+label,
+.input-group_card input:not(:placeholder-shown)+label {
+    top: 18px;
+    font-size: 12px;
+}
+
+
+.input-group_card input:focus,
+.input-group_card input:not(:placeholder-shown) {
+    position: relative;
+    top: 10px;
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1440px) {
+
+    .bookingtab_buttons {
+        padding: 18px 91px !important;
+    }
+
+    .wallettab_buttons{
+        padding: 18px 97px !important;
+    }
+
+    .notification_drawer {
+        left: 70px !important;
+    }
+
+}
+
 @media screen and (min-width: 1440px) and (max-width: 2560px) {
+
+    .user_container{
+        padding: 80px 0;
+    }
 
     .toogleonline_visible {
         left: 72px !important;
@@ -395,10 +469,29 @@ body {
         height: 84vh;
     }
 
+    .datediv {
+        width: 300px;
+    }
+
+    .padding_0 {
+        padding: 0;
+    }
 }
 
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
+
+    .card_full{
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .bookingtab_buttons {
+        padding: 18px 58px !important;
+    }
+
+    .wallettab_buttons{
+        padding: 18px 58px !important;
+    }
 
     .booking_tabs {
         gap: 10px;
@@ -512,6 +605,21 @@ body {
     .notification_drawer {
         left: 0px;
     }
+
+    .bookingdetail_profile {
+        /* width: fit-content; */
+        margin: auto auto 40px;
+    }
+
+    .bookingdetail_profile_sub {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .bookingdetail_divider {
+        display: none;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
@@ -519,7 +627,7 @@ body {
     .booking_tabs {
         gap: 10px;
     }
-    
+
     .profilestatus_div {
         flex-direction: column;
         gap: 0px;
@@ -566,9 +674,34 @@ body {
         height: 86vh;
     }
 
+    .datediv {
+        width: 100%;
+    }
+
+    .bookingtable_header {
+        flex-direction: column-reverse;
+    }
+
+    .bookingtable_header h3 {
+        order: 1;
+    }
+
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1200px) {
+
+    .bookingtable_header {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .bookingtab_buttons {
+        padding: 18px 70px !important;
+    }
+
+    .wallettab_buttons{
+        padding: 18px 70px !important;
+    }
 
     .looqer_language_dropdown {
         left: -500px !important;
@@ -600,7 +733,6 @@ body {
     .headertoogle_div {
         margin-right: 30px;
     }
-
 
     .filteropen {
         display: block;
@@ -878,4 +1010,12 @@ body {
 .input-groupedit input:not(:placeholder-shown) {
     position: relative;
     top: 8px;
+}
+
+.notification_timer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #6E2C91CC;
+    border-radius: 50%;
 }

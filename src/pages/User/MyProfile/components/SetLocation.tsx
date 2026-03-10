@@ -54,7 +54,7 @@ function SetLocation({ isOpen = false, onClose, title, showNickname = true, init
     if (!isOpen) return null;
 
     return (
-        <div className="fixed top-[0] left-[0] right-[0] bottom-[0] z-50 flex items-center justify-center max-sm:px-[10px] ">
+        <div className="fixed top-[0] left-[0] right-[0] bottom-[0] z-[101] flex items-center justify-center max-sm:px-[10px] ">
             <div
                 className="absolute top-[0] left-[0] right-[0] bottom-[0] bg-[rgba(0,0,0,0.5)]"
                 onClick={onClose}

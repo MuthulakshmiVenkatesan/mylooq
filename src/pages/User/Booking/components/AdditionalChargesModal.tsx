@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { CloseIcon, InfoIcon } from "../../../../components/customfile/icons";
+import { useLockBodyScroll } from "../../../../hooks/useLockBodyScroll";
 
 interface ServiceItem {
     name: string;
@@ -20,7 +21,7 @@ export default function AdditionalChargesModal({ isOpen, onClose, onSubmit, serv
     const [discount, setDiscount] = useState<string>("");
     const [finalAmount, setFinalAmount] = useState<number>(serviceCost);
     const [showServiceTooltip, setShowServiceTooltip] = useState<boolean>(false);
-
+    const [focusedField, setFocusedField] = useState<string | null>(null);
     useEffect(() => {
         if (isOpen) {
             // Reset form when modal opens
@@ -48,6 +49,8 @@ export default function AdditionalChargesModal({ isOpen, onClose, onSubmit, serv
         onClose();
     };
 
+    useLockBodyScroll(isOpen);
+
     if (!isOpen) return null;
 
     return (
@@ -70,7 +73,7 @@ export default function AdditionalChargesModal({ isOpen, onClose, onSubmit, serv
 
                 <div className="flex flex-col gap-[8px] mb-[30px]">
                     {/* Service Cost (Read-only) */}
-                    <div className="w-full input-groups relative flex bg-[#F2F2F2] p-[0px_30px] rounded-full border transition-all duration-150 border-transparent">
+                    <div className="w-full input-group relative flex bg-[rgba(0,0,0,0.15)] p-[0px_30px] rounded-full border transition-all duration-150 border-transparent">
                         <input
                             type="text"
                             value={`${serviceCost.toFixed(2)}`}
@@ -89,10 +92,10 @@ export default function AdditionalChargesModal({ isOpen, onClose, onSubmit, serv
                             </button>
                             {/* Service List Tooltip */}
                             {showServiceTooltip && services.length > 0 && (
-                                <div className="absolute top-[60px] right-[-20px] bg-white rounded-[30px] shadow-[0px_4px_15px_0px_rgba(0,0,0,0.10)] w-[320px] z-[106]">
+                                <div className="absolute top-[60px] right-[-30px] bg-white rounded-[30px] shadow-[0px_4px_15px_0px_rgba(0,0,0,0.10)] w-[350px] z-[106]">
                                     <div className="flex flex-col">
                                         {services.map((service, index) => (
-                                            <div key={index} className="flex items-center justify-between p-[16px_20px] border-b border-[rgba(0,0,0,0.10)]">
+                                            <div key={index} className="flex items-center justify-between p-[16px_20px] border-b border-[rgba(0,0,0,0.10)] last:border-b-0">
                                                 <h4 className="text-[14px] font-[Regular] text-[#000]">
                                                     {service.name}
                                                 </h4>
@@ -108,8 +111,10 @@ export default function AdditionalChargesModal({ isOpen, onClose, onSubmit, serv
                     </div>
 
                     {/* Material Fee Input */}
-                    <div className="w-full input-groups relative flex bg-[#F2F2F2] p-[0px_30px] rounded-full border transition-all duration-150 border-transparent">
+                    <div className={`w-full input-group relative flex p-[0px_30px] rounded-full border transition-all duration-150  ${focusedField === "materialFee" ? "bg-[#fff] border-[#6E2C91]" : "bg-[#F2F2F2] border-transparent"}`}>
                         <input
+                            onFocus={() => setFocusedField("materialFee")}
+                            onBlur={() => setFocusedField(null)}
                             type="text"
                             value={materialFee}
                             onChange={(e) => setMaterialFee(e.target.value)}
@@ -120,8 +125,10 @@ export default function AdditionalChargesModal({ isOpen, onClose, onSubmit, serv
                     </div>
 
                     {/* Misc Fee Input */}
-                    <div className="w-full input-groups relative flex bg-[#F2F2F2] p-[0px_30px] rounded-full border transition-all duration-150 border-transparent">
+                    <div className={`w-full input-group relative flex p-[0px_30px] rounded-full border transition-all duration-150  ${focusedField === "miscFee" ? "bg-[#fff] border-[#6E2C91]" : "bg-[#F2F2F2] border-transparent"}`}>
                         <input
+                            onFocus={() => setFocusedField("miscFee")}
+                            onBlur={() => setFocusedField(null)}
                             type="text"
                             value={miscFee}
                             onChange={(e) => setMiscFee(e.target.value)}
@@ -132,8 +139,10 @@ export default function AdditionalChargesModal({ isOpen, onClose, onSubmit, serv
                     </div>
 
                     {/* LooQer Discount Input */}
-                    <div className="w-full input-groups relative flex bg-[#F2F2F2] p-[0px_30px] rounded-full border transition-all duration-150 border-transparent">
+                    <div className={`w-full input-group relative flex p-[0px_30px] rounded-full border transition-all duration-150  ${focusedField === "discount" ? "bg-[#fff] border-[#6E2C91]" : "bg-[#F2F2F2] border-transparent"}`}>
                         <input
+                            onFocus={() => setFocusedField("discount")}
+                            onBlur={() => setFocusedField(null)}
                             type="text"
                             value={discount}
                             onChange={(e) => setDiscount(e.target.value)}

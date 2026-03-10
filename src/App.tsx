@@ -40,10 +40,16 @@ import UserBookingDetail from "./pages/User/Booking/components/BookingDetail";
 import UserWallet from "./pages/User/Wallet/Wallet";
 import UserProfile from "./pages/User/MyProfile/MyProfile";
 import UserEditProfile from "./pages/User/MyProfile/components/EditProfile";
+import ScrollToTop from "./hooks/ScrollToTop";
+
 function App() {
+  
   return (
     <div className="whole_app">
       <BrowserRouter basename="/mylooq">
+
+      <ScrollToTop />
+
         <Routes>
           <Route element={<LooquerIndex />}>
             <Route path="/looqer/home" element={<Home />} />

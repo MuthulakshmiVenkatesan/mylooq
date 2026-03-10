@@ -84,7 +84,7 @@ function DocumentsStep() {
   }, []);
 
   return (
-    <div className={`bg-[#fff] p-[24px_30px_0px] flex-1 max-sm:p-[24px_15px_0px] mt-[120px] max-sm:mt-[118px] max-sm:pb-[0px] ${isDocumentsRoute ? "!m-[0] pt-[60px] pb-[80px] max-sm:pb-[30px] min-h-[100vh] max-sm:min-h-auto main_height" : ""}`}>
+    <div className={`bg-[#fff] p-[24px_30px_0px] flex-1 max-sm:p-[24px_15px_0px] mt-[120px] max-sm:mt-[118px] max-sm:pb-[0px] ${isDocumentsRoute ? "!m-[0] pt-[60px] pb-[80px] max-sm:pb-[30px] min-h-[100vh] max-sm:min-h-[68vh] myprofile_height" : ""}`}>
       <div className="flex flex-col items-center">
         <div className="flex flex-col mb-[30px] text-center">
           <h4 className="m-[0px] text-[24px] font-[Bold] text-[#000] text30px">Documents</h4>

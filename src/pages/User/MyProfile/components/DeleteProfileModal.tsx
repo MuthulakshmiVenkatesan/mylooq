@@ -32,7 +32,7 @@ export default function DeleteProfileModal({ isOpen, onClose, onConfirm }: Delet
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center max-sm:px-[10px]">
+        <div className="fixed inset-0 z-[101] flex items-center justify-center max-sm:px-[10px]">
             {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-[rgba(0,0,0,0.5)]"
@@ -67,14 +67,14 @@ export default function DeleteProfileModal({ isOpen, onClose, onConfirm }: Delet
                         className="w-full cursor-pointer p-[14px_30px] rounded-full bg-[#000] text-[#fff] text-[14px] font-[Bold] border-none outline-none"
                         onClick={onClose}
                     >
-                        Change
+                        No
                     </button>
                     <button
                         type="button"
                         className="w-full cursor-pointer p-[14px_30px] rounded-full bg-[#6E2C91] text-[#fff] text-[14px] font-[Bold] border-none outline-none"
                         onClick={handleConfirm}
                     >
-                        Save
+                        Yes
                     </button>
                 </div>
             </div>

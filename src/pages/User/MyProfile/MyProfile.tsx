@@ -160,7 +160,7 @@ export default function MyProfile() {
         <>
             <div className="bg-[#fff] mt-[70px]">
                 <div className="py-[80px] common_p_80 max-sm:py-[0px_0px]">
-                    <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full">
+                    <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full padding_0">
                         {/* Top Profile Section */}
                         <div className="flex flex-col items-center mb-[40px]">
                             {/* Profile Picture with Edit Icon */}
@@ -213,8 +213,8 @@ export default function MyProfile() {
                                         <LocationIcon className="w-[20px] h-[20px]" />
                                     </div>
                                     <div className="text-left flex flex-col items-start gap-[2px]">
-                                        <p className="text-[12px] font-[Regular] text-[#878387]">Account status</p>
-                                        <h4 className="text-[14px] font-[SemiBold] text-[#000]">Admin Verifying</h4>
+                                        <p className="text-[12px] font-[Regular] text-[#878387]">Your Country</p>
+                                        <h4 className="text-[14px] font-[SemiBold] text-[#000]">America</h4>
                                     </div>
                                 </div>
 
@@ -243,8 +243,8 @@ export default function MyProfile() {
                         </div>
                     </div>
 
-                    <div className="w-full border-t border-[rgba(0,0,0,0.10)] pt-[40px] mt-[40px] max-sm:mb-[40px]">
-                        <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full">
+                    <div className="w-full border-t border-[rgba(0,0,0,0.10)] pt-[50px] mt-[50px] max-sm:mb-[50px]">
+                        <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full padding_0">
                             {/* Manage Location and Cards Section */}
                             <div className="w-full">
                                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -348,11 +348,11 @@ export default function MyProfile() {
                                             {savedCards.length > 0 ? (
                                                 <>
                                                     {/* Cards Grid */}
-                                                    <div className="grid grid-cols-2 gap-[20px] mb-[30px] max-sm:grid-cols-1">
+                                                    <div className="grid grid-cols-2 gap-[15px] mb-[30px] max-sm:grid-cols-1 card_full">
                                                         {savedCards.map((card) => (
                                                             <div
                                                                 key={card.id}
-                                                                className="border border-[rgba(0,0,0,0.10)] rounded-[30px] p-[30px] bg-[#fff] relative"
+                                                                className="border border-[rgba(0,0,0,0.10)] rounded-[30px] p-[20px] bg-[#fff] relative"
                                                             >
                                                                 <div className="flex items-center justify-between gap-[12px]">
                                                                     <div className="flex items-center justify-between gap-[12px] w-full">
@@ -367,11 +367,11 @@ export default function MyProfile() {
                                                                                 {maskCardNumber(card.cardNumber)}
                                                                             </h4>
                                                                             <div className="flex items-center gap-[10px]">
-                                                                                <p className="text-[12px] font-[Regular] text-[#878387]">
+                                                                                <p className="text-[12px] font-[Regular] text-[#000]">
                                                                                     {card.holderName}
                                                                                 </p>
                                                                                 <div className="bg-[#000] p-[2px] rounded-full"></div>
-                                                                                <p className="text-[12px] font-[Regular] text-[#878387]">{card.expiry}</p>
+                                                                                <p className="text-[12px] font-[Regular] text-[#000]">{card.expiry}</p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -401,7 +401,7 @@ export default function MyProfile() {
                                                     {/* Add New Card Button */}
                                                     <button
                                                         onClick={handleAddCard}
-                                                        className="w-full rounded-[30px] p-[18px] bg-[#EFEFEF] flex items-center justify-center gap-[10px] cursor-pointer"
+                                                        className="w-full rounded-[30px] p-[16px] bg-[#EFEFEF] flex items-center justify-center gap-[10px] cursor-pointer"
                                                     >
                                                         <PlusIcon className="w-[12px] h-[12px]" stroke="#000" />
                                                         <p className="text-[14px] font-[Regular] text-[#000]">Add new card</p>

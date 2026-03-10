@@ -44,13 +44,13 @@ export default function Wallet() {
             <div className="px-5 lg:px-[75px] max-w-[1230px] mx-auto w-full looqer_home_container max-sm:px-[15px]">
                 {/* Earnings Summary */}
                 <div className="flex items-center justify-center gap-[80px] mb-[40px] max-sm:flex-col border-b border-[rgba(0,0,0,0.10)] pb-[40px] max-sm:gap-[20px]">
-                    <div className="text-center">
-                        <h4 className="text-[14px] font-[Regular] text-[#000] mb-[6px]">Total earnings</h4>
+                    <div className="text-center max-sm:border-b border-[rgba(0,0,0,0.10)] pb-[20px] max-sm:w-full">
+                        <h4 className="text-[14px] font-[Regular] text-[#000] mb-[6px]">Wallet balance</h4>
                         <h3 className="text-[28px] font-[Bold] text-[#000]">$20,000.00</h3>
                     </div>
-                    <div className="w-[1px] h-[40px] bg-[rgba(0,0,0,0.10)]"></div>
+                    <div className="w-[1px] h-[40px] bg-[rgba(0,0,0,0.10)] max-sm:hidden"></div>
                     <div className="text-center">
-                        <h4 className="text-[14px] font-[Regular] text-[#000] mb-[6px]">Today earnings</h4>
+                        <h4 className="text-[14px] font-[Regular] text-[#000] mb-[6px]">Total earnings</h4>
                         <h3 className="text-[28px] font-[Bold] text-[#000]">$20,000.00</h3>
                     </div>
                 </div>
@@ -58,9 +58,9 @@ export default function Wallet() {
                 {/* Transaction History Section */}
                 <div className="">
                     {/* Header with Title, Entries Select, and Search */}
-                    <div className="mb-[30px]">
-                        <div className="flex items-center justify-between gap-[20px] flex-1 max-sm:flex-col max-sm:gap-[10px]">
-                            <div className="flex items-center gap-[8px]">
+                    <div className="mb-[20px]">
+                        <div className="flex items-center justify-between gap-[20px] flex-1 max-sm:flex-col-reverse max-sm:gap-[10px] bookingtable_header">
+                            <div className="flex items-center gap-[8px] w-[240px] max-sm:w-full">
                                 <p className="text-[14px] font-[Medium] text-[#000]">Show</p>
                                 <Select value={entriesPerPage} onValueChange={setEntriesPerPage}>
                                     <SelectTrigger className="p-[10px_20px] rounded-[10px] border border-[rgba(0,0,0,0.1)] bg-[#fff] text-[14px] font-[Regular] text-[#000] cursor-pointer">
@@ -81,7 +81,7 @@ export default function Wallet() {
                                 </Select>
                                 <p className="text-[14px] font-[Medium] text-[#000]">entries</p>
                             </div>
-                            <h3 className="text-[22px] font-[Bold] text-[#000]">Transaction history</h3>
+                            <h3 className="text-[22px] font-[Bold] text-[#000] max-sm:order-1">Transaction history</h3>
                             <div className="bg-[#EFEFEF] rounded-full p-[16px_20px] flex items-center gap-[10px]">
                                 <SearchIcon className="w-[18px] h-[18px]" stroke="#000" />
                                 <input
@@ -95,19 +95,19 @@ export default function Wallet() {
                         </div>
                     </div>
                     {/* Table */}
-                    <div className="overflow-x-auto rounded-[30px] border border-[#E0DAF4] bg-[#fff] table_scrollbar">
+                    <div className="overflow-x-auto rounded-[30px] border border-[rgba(0,0,0,0.10)] bg-[#fff] table_scrollbar">
                         <table className="w-full max-sm:w-[330vw] looqer_home_table">
                             <thead className="bg-[#EBE4EF]">
                                 <tr>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">ID</th>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Booking date</th>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Fare</th>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Commission</th>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Total Fee</th>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Tip</th>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Payment</th>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Payment Type</th>
-                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Invoice</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">ID</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Booking date</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Fare</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Commission</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Total Fee</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Tip</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Payment</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Payment Type</th>
+                                    <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Invoice</th>
                                 </tr>
                             </thead>
                             <tbody className="border-b border-[rgba(0,0,0,0.1)] last:border-b-0 last:border-none">
@@ -137,8 +137,10 @@ export default function Wallet() {
                                         <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#000]">
                                             {transaction.payment}
                                         </td>
-                                        <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#000]">
-                                            {transaction.paymentType}
+                                        <td className="p-[15px_30px]">
+                                            <div className="border border-[rgba(0,0,0,0.1)] rounded-[5px] p-[4px_10px] w-fit">
+                                                <p className="text-[12px] font-[Regular] text-[#000]">{transaction.paymentType}</p>
+                                            </div>
                                         </td>
                                         <td className="p-[15px_30px]">
                                             <button className="flex items-center gap-[6px] cursor-pointer ">
@@ -153,7 +155,7 @@ export default function Wallet() {
                     </div>
 
                     {/* Pagination */}
-                    <div className="p-[30px] flex flex-col items-center justify-between gap-[20px]">
+                    <div className="pt-[30px] flex flex-col items-center justify-between gap-[20px]">
                         <nav className="flex items-center gap-[10px]">
                             <button
                                 type="button"

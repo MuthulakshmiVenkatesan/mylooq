@@ -1,4 +1,5 @@
 import { CloseIcon } from "../../../../components/customfile/icons";
+import { useLockBodyScroll } from "../../../../hooks/useLockBodyScroll";
 
 interface PaySummaryItem {
     name: string;
@@ -13,6 +14,8 @@ interface PaySummaryModalProps {
 }
 
 export default function PaySummaryModal({ isOpen, onClose, items, earnedAmount }: PaySummaryModalProps) {
+    useLockBodyScroll(isOpen);
+
     if (!isOpen) return null;
 
     return (

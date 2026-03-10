@@ -61,8 +61,8 @@ export default function BookingTable({
     return (
         <div className="bg-[#fff]">
             {/* Header with Entries Select and Title */}
-            <div className="mb-[30px]">
-                <div className="max-sm:flex-col max-sm:gap-[10px] flex items-center justify-between gap-[20px] flex-1">
+            <div className="mb-[20px]">
+                <div className="max-sm:flex-col-reverse max-sm:gap-[10px] flex items-center justify-between gap-[20px] flex-1 bookingtable_header">
                     <div className="flex items-center gap-[8px]">
                         <p className="text-[14px] font-[Medium] text-[#000]">Show</p>
                         <Select value={entriesPerPage} onValueChange={setEntriesPerPage}>
@@ -84,7 +84,7 @@ export default function BookingTable({
                         </Select>
                         <p className="text-[14px] font-[Medium] text-[#000]">entries</p>
                     </div>
-                    <h3 className="text-[22px] font-[Bold] text-[#000]">{title}</h3>
+                    <h3 className="max-sm:order-1 text-[22px] font-[Bold] text-[#000]">{title}</h3>
                     <div className="bg-[#EFEFEF] rounded-full p-[16px_20px] flex items-center gap-[10px]">
                         <SearchIcon className="w-[18px] h-[18px]" stroke="#000" />
                         <input
@@ -99,20 +99,20 @@ export default function BookingTable({
             </div>
 
             {/* Table */}
-            <div className="overflow-x-auto rounded-[30px] border border-[#E0DAF4] bg-[#fff] table_scrollbar">
+            <div className="overflow-x-auto rounded-[30px] border border-[rgba(0,0,0,0.10)] bg-[#fff] table_scrollbar">
                 <table className="w-full max-sm:w-[330vw] looqer_home_table">
                     <thead className="bg-[#EBE4EF]">
                         <tr>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Booking ID</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Customer name</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Date & Time</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Booking ID</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Customer name</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Date & Time</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Booked services</th>
                             {showPayment ? (
-                                <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Payment</th>
+                                <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Payment</th>
                             ) : (
-                                <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Status</th>
+                                <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Status</th>
                             )}
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Booked services</th>
-                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold]">Location</th>
+                            <th className="text-[#000] text-[14px] p-[16px_30px] text-left font-[SemiBold] align-baseline">Location</th>
                         </tr>
                     </thead>
                     <tbody className="border-b border-[rgba(0,0,0,0.1)] last:border-b-0 last:border-none">
@@ -122,7 +122,7 @@ export default function BookingTable({
                                 onClick={() => handleRowClick(booking.id)}
                                 className="border-b border-[rgba(0,0,0,0.1)] last:border-b-0 last:border-none cursor-pointer hover:bg-[#F8F8F8] transition-colors"
                             >
-                                <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#878387">
+                                <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#878387]">
                                     {booking.id}
                                 </td>
                                 <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#000">
@@ -130,6 +130,23 @@ export default function BookingTable({
                                 </td>
                                 <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#000">
                                     {booking.datetime}
+                                </td>
+                                <td className="p-[15px_30px]">
+                                    <div className="flex flex-wrap items-center gap-[6px]">
+                                        {booking.services.slice(0, 2).map((service) => (
+                                            <p
+                                                key={service}
+                                                className="rounded-[5px] border border-[rgba(0,0,0,0.1)] p-[4px_10px] text-[12px] font-[Regular] text-[#000]"
+                                            >
+                                                {service}
+                                            </p>
+                                        ))}
+                                        {booking.services.length > 2 && (
+                                            <p className="text-[12px] font-[Regular] text-[#000]">
+                                                +{booking.services.length - 2}
+                                            </p>
+                                        )}
+                                    </div>
                                 </td>
                                 {showPayment ? (
                                     <td className="p-[15px_30px] text-[14px] font-[Regular] text-[#000">
@@ -139,7 +156,7 @@ export default function BookingTable({
                                     <td className="p-[15px_30px]">
                                         {booking.status && (
                                             <p
-                                                className={`inline-flex items-center justify-center rounded-[50px] px-[14px] py-[8px] text-[12px] font-[SemiBold] text-[#fff] ${statusStyles[booking.status] ?? ""
+                                                className={`inline-flex items-center justify-center rounded-[50px] px-[14px] py-[6px] text-[12px] font-[SemiBold] text-[#fff] ${statusStyles[booking.status] ?? ""
                                                     }`}
                                             >
                                                 {booking.status}
@@ -147,18 +164,7 @@ export default function BookingTable({
                                         )}
                                     </td>
                                 )}
-                                <td className="p-[15px_30px]">
-                                    <div className="flex flex-wrap gap-[6px]">
-                                        {booking.services.map((service) => (
-                                            <p
-                                                key={service}
-                                                className="rounded-[5px] border border-[rgba(0,0,0,0.1)] p-[4px_10px] text-[12px] font-[Regular] text-[#000]"
-                                            >
-                                                {service}
-                                            </p>
-                                        ))}
-                                    </div>
-                                </td>
+                                
                                 <td className="p-[15px_30px]">
                                     <p className="text-[14px] font-[Regular] text-[#000] truncate max-w-[100px]">{booking.location}</p>
                                 </td>
@@ -169,7 +175,7 @@ export default function BookingTable({
             </div>
 
             {/* Pagination */}
-            <div className="p-[30px] flex flex-col items-center justify-between gap-[20px]">
+            <div className="pt-[30px] flex flex-col items-center justify-between gap-[20px]">
                 <nav className="flex items-center gap-[10px]">
                     <button
                         type="button"

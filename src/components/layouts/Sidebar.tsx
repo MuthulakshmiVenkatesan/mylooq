@@ -55,10 +55,13 @@ function Sidebar() {
                             to={item.path}
                             end
                             className={({ isActive }) =>
-                                `flex h-[44px] w-[44px] items-center justify-center rounded-[10px] p-[6px] transition ${isActive ? "bg-[#EFEFEF] " : "bg-transparent "
+                                `flex h-[44px] w-[44px] items-center justify-center rounded-[10px] p-[6px] transition focus:outline-none focus:border-none focus:shadow-none ${isActive && !isNotificationDrawerOpen ? "bg-[#EFEFEF] " : "bg-transparent "
                                 }`
                             }
-                            onClick={() => setIsDrawerOpen(false)}
+                            onClick={() => {
+                                setIsDrawerOpen(false);
+                                setIsNotificationDrawerOpen(false);
+                            }}
                         >
                             {item.icon}
                         </NavLink>
@@ -68,7 +71,9 @@ function Sidebar() {
                             setIsNotificationDrawerOpen(true);
                             setIsDrawerOpen(false);
                         }}
-                        className="flex h-[44px] w-[44px] items-center justify-center rounded-[10px] p-[6px] transition bg-transparent hover:bg-[#EFEFEF] cursor-pointer"
+                        className={`flex h-[44px] w-[44px] items-center justify-center rounded-[10px] p-[6px] transition cursor-pointer focus:outline-none focus:border-none focus:shadow-none ${
+                            isNotificationDrawerOpen ? "bg-[#EFEFEF]" : "bg-transparent hover:bg-[#EFEFEF]"
+                        }`}
                     >
                         <NotificationIcon className="w-[22px] h-[22px]" />
                     </button>
